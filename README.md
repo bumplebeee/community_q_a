@@ -28,9 +28,5 @@ A platform for the community to share, buy, sell, and exchange goods. Users can 
 - **Backend**: Node.js  
 - **Database**: 
 
-📧 Contact
-If you have any questions, suggestions, or feedback, feel free to reach out:
-
-- **Email**: tranngohungvi@gmail.com
 
 

@@ -1,0 +1,29 @@
+/* Login.css */
+body {
+  background-color: rgba(5, 127, 175, 0.6); /* Light background color */
+}
+.body {
+  margin-top: 100px;
+}
+.container {
+  border-radius: 15px; /* Apply border radius to the container */
+  border: 1px solid #ddd; /* Optional: Add a border for better visibility */
+  padding: 20px; /* Add padding inside the container */
+  background-color: #f8f9fa; /* Light background color */
+}
+
+.nav-pills .nav-link {
+  border-radius: 30px; /* Round the navigation pill borders */
+}
+
+.tab-content {
+  margin-top: 20px;
+}
+
+.form-control {
+  border-radius: 8px; /* Round the input fields */
+}
+
+button[type="submit"] {
+  border-radius: 8px; /* Round the submit button */
+}

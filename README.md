@@ -25,7 +25,7 @@ A platform for the community to share, buy, sell, and exchange goods. Users can 
 ## 💻 Tech Stack
 
 - **Frontend**: HTML, CSS, JavaScript, React FrameWork 
-- **Backend**: Node.js (or Python/Django, Ruby on Rails)  
+- **Backend**: Node.js  
 - **Database**: 
 
 📧 Contact

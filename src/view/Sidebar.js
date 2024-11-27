@@ -3,7 +3,7 @@ import { Card, ListGroup } from "react-bootstrap";
 
 function Sidebar() {
     return (
-        <div>
+        <div style={{ width: "20%" }}>
             {/* Related Tags */}
             <Card className="mb-4">
                 <Card.Header>Related Tags</Card.Header>
@@ -25,15 +25,6 @@ function Sidebar() {
                     <ListGroup.Item>User3 - 4200 points</ListGroup.Item>
                     <ListGroup.Item>User4 - 3900 points</ListGroup.Item>
                 </ListGroup>
-            </Card>
-
-            {/* Announcements */}
-            <Card>
-                <Card.Header>Announcements</Card.Header>
-                <Card.Body>
-                    <p>New badges are available!</p>
-                    <p>Join our upcoming community event!</p>
-                </Card.Body>
             </Card>
         </div>
     );

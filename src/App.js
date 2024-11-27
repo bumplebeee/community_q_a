@@ -15,10 +15,8 @@ function App() {
             <Navbar />
             <Container fluid>
                 <div className="d-flex">
-                    {/* Sidebar */}
                     <Sidebar />
 
-                    {/* Main Content */}
                     <div style={{ width: "80%" }}>
                         <Routes>
                             <Route path="/" element={<Home />} />

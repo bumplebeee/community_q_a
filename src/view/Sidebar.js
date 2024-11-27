@@ -6,19 +6,21 @@ function Sidebar() {
         <div style={{ width: "20%" }}>
             {/* Related Tags */}
             <Card className="mb-4">
-                <Card.Header>Related Tags</Card.Header>
+                <Card.Header style={{ backgroundColor: "pink" }}>
+                    Related Tags
+                </Card.Header>
                 <ListGroup variant="flush">
-                    <ListGroup.Item>JavaScript</ListGroup.Item>
-                    <ListGroup.Item>React</ListGroup.Item>
-                    <ListGroup.Item>CSS</ListGroup.Item>
-                    <ListGroup.Item>HTML</ListGroup.Item>
-                    <ListGroup.Item>Node.js</ListGroup.Item>
+                    <ListGroup.Item>Backend Development</ListGroup.Item>
+                    <ListGroup.Item>Frontend Development</ListGroup.Item>
+                    <ListGroup.Item>Database Design</ListGroup.Item>
                 </ListGroup>
             </Card>
 
             {/* Top Users */}
             <Card className="mb-4">
-                <Card.Header>Top Users</Card.Header>
+                <Card.Header style={{ backgroundColor: "pink" }}>
+                    Top Users
+                </Card.Header>
                 <ListGroup variant="flush">
                     <ListGroup.Item>User1 - 5000 points</ListGroup.Item>
                     <ListGroup.Item>User2 - 4500 points</ListGroup.Item>

@@ -7,6 +7,7 @@ import Home from "./view/Home";
 import Questions from "./view/Question";
 import Tags from "./view/Tags";
 import Users from "./view/User";
+import Footer from "./view/Footer";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                     </div>
                 </div>
             </Container>
+            <Footer />
         </Router>
     );
 }

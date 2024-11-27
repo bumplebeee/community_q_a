@@ -201,68 +201,6 @@
     {
       "id": 201,
       "questionId": 101,
-      "content": "You can use libraries like Passport.js for implementing authentication in Node.js. It supports multiple strategies such as local, OAuth, etc.",
-      "userId": 2
-    },
-    {
-      "id": 202,
-      "questionId": 102,
-      "content": "A closure is a function that retains access to its parent scope, even after the parent function has closed. Here's an example:\n```javascript\nfunction outer() {\n    let count = 0;\n    return function inner() {\n        count++;\n        return count;\n    };\n}\nconst counter = outer();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n",
-      "userId": 1
-    },
-    {
-      "id": 203,
-      "questionId": 103,
-      "content": "If the request is correct, the API running on that server should send back a JSON string with store info. This obviously works fine from the Starbucks website, when the browser is sending the request, but my goal is to send the request programmatically, and when I do so I am getting a Bad Request error.I am using curl to try and figure out what works, but no luck so far. This is my curl command...",
-      "userId": 1
-    },
-    {
-      "id": 204,
-      "questionId": 104,
-      "content": "A closure is a function that retains access to its parent scope, even after the parent function has closed. Here's an example:\n```javascript\nfunction outer() {\n    let count = 0;\n    return function inner() {\n        count++;\n        return count;\n    };\n}\nconst counter = outer();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n",
-      "userId": 1
-    },
-    {
-      "id": 205,
-      "questionId": 105,
-      "content": "A closure is a function that retains access to its parent scope, even after the parent function has closed. Here's an example:\n```javascript\nfunction outer() {\n    let count = 0;\n    return function inner() {\n        count++;\n        return count;\n    };\n}\nconst counter = outer();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n",
-      "userId": 1
-    },
-    {
-      "id": 206,
-      "questionId": 106,
-      "content": "A closure is a function that retains access to its parent scope, even after the parent function has closed. Here's an example:\n```javascript\nfunction outer() {\n    let count = 0;\n    return function inner() {\n        count++;\n        return count;\n    };\n}\nconst counter = outer();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n",
-      "userId": 1
-    },
-    {
-      "id": 207,
-      "questionId": 107,
-      "content": "A closure is a function that retains access to its parent scope, even after the parent function has closed. Here's an example:\n```javascript\nfunction outer() {\n    let count = 0;\n    return function inner() {\n        count++;\n        return count;\n    };\n}\nconst counter = outer();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n",
-      "userId": 1
-    },
-    {
-      "id": 208,
-      "questionId": 108,
-      "content": "A closure is a function that retains access to its parent scope, even after the parent function has closed. Here's an example:\n```javascript\nfunction outer() {\n    let count = 0;\n    return function inner() {\n        count++;\n        return count;\n    };\n}\nconst counter = outer();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n",
-      "userId": 1
-    },
-    {
-      "id": 209,
-      "questionId": 109,
-      "content": "A closure is a function that retains access to its parent scope, even after the parent function has closed. Here's an example:\n```javascript\nfunction outer() {\n    let count = 0;\n    return function inner() {\n        count++;\n        return count;\n    };\n}\nconst counter = outer();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n",
-      "userId": 1
-    },
-    {
-      "id": 210,
-      "questionId": 110,
-      "content": "A closure is a function that retains access to its parent scope, even after the parent function has closed. Here's an example:\n```javascript\nfunction outer() {\n    let count = 0;\n    return function inner() {\n        count++;\n        return count;\n    };\n}\nconst counter = outer();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n",
-      "userId": 1
-    }
-  ],
-  "answers": [
-    {
-      "id": 201,
-      "questionId": 101,
       "content": "You can use libraries like Passport.js for authentication in Node.js. Passport supports multiple strategies such as local, OAuth, and JWT.",
       "userId": 2
     },

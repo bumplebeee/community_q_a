@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./util.css";
 import "./main.css";
@@ -13,9 +12,16 @@ const LoginScreen = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("http://localhost:9999/users");
-
-      const user = response.data.find((user) => user.username === username);
+      // Fetch dữ liệu từ file database.json
+      const response = await fetch("/database.json");
+      if (!response.ok) {
+        throw new Error("Failed to load data");
+      }
+  
+      const data = await response.json(); // Parse dữ liệu JSON
+  
+      // Kiểm tra thông tin người dùng
+      const user = data.users.find((user) => user.username === username);
       if (user && user.passwordHash === password) {
         navigate("/home");
       } else {
@@ -34,7 +40,19 @@ const LoginScreen = () => {
         );
       }
     } catch (error) {
-      setError("Something went wrong!");
+      setError(
+        <p
+          style={{
+            fontFamily: "Ubuntu, sans-serif",
+            marginBottom: "10px",
+            textAlign: "center",
+            color: "red",
+            fontSize: "16px",
+          }}
+        >
+          Something went wrong!
+        </p>
+      );
     }
   };
 

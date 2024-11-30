@@ -3,71 +3,57 @@ import { Card, Button, Row, Col, Badge } from "react-bootstrap";
 
 function QuestionList() {
     const [questions, setQuestions] = useState([]);
-    const [answers, setAnswers] = useState({}); // Trạng thái lưu câu trả lời
-    const [expandedAnswers, setExpandedAnswers] = useState({}); // Trạng thái theo dõi câu trả lời đã mở hay chưa
-    const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
-    const questionsPerPage = 2; // Số câu hỏi mỗi trang
+    const [answers, setAnswers] = useState({}); // Store answers for each question
+    const [expandedAnswers, setExpandedAnswers] = useState({}); // Track which answers are expanded
+    const [currentPage, setCurrentPage] = useState(1); // Current page
+    const questionsPerPage = 2; // Questions per page
 
     useEffect(() => {
+        // Fetch data only once during component mount
         fetch("/database.json")
             .then((response) => response.json())
             .then((data) => {
+                // Update questions and answers
                 const questionList = data.questions.map((question) => ({
                     ...question,
-                    answers: [], // Mảng câu trả lời, sẽ được cập nhật khi nhấn "Read more"
+                    answers: [], // Empty initially, answers will be filled on "Read more"
                 }));
                 setQuestions(questionList);
+
+                // Prepare answers for each question
+                const answerMap = {};
+                data.answers.forEach((answer) => {
+                    if (!answerMap[answer.questionId]) {
+                        answerMap[answer.questionId] = [];
+                    }
+                    answerMap[answer.questionId].push(answer);
+                });
+                setAnswers(answerMap); // Store all answers in state
             })
             .catch((error) => console.error("Error loading data:", error));
     }, []);
 
-    // Hàm xử lý khi nhấn "Read more"
+    // Handle the "Read more" functionality
     const handleReadMore = (questionId) => {
-        // Nếu câu trả lời đã được mở, sẽ thu gọn lại
-        if (expandedAnswers[questionId]) {
-            setExpandedAnswers((prev) => ({ ...prev, [questionId]: false }));
-        } else {
-            // Nếu câu trả lời chưa mở, sẽ tải và hiển thị
-            fetch("/database.json")
-                .then((response) => response.json())
-                .then((data) => {
-                    const questionAnswers = data.answers.filter(
-                        (answer) => answer.questionId === questionId
-                    );
-                    setAnswers((prevAnswers) => ({
-                        ...prevAnswers,
-                        [questionId]: questionAnswers,
-                    }));
-                    setExpandedAnswers((prev) => ({
-                        ...prev,
-                        [questionId]: true,
-                    }));
-                })
-                .catch((error) =>
-                    console.error("Error loading answers:", error)
-                );
-        }
+        setExpandedAnswers((prev) => ({
+            ...prev,
+            [questionId]: !prev[questionId], // Toggle expanded state
+        }));
     };
 
-    // Tính toán câu hỏi cần hiển thị cho trang hiện tại
+    // Pagination logic
     const indexOfLastQuestion = currentPage * questionsPerPage;
     const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
-    const currentQuestions = questions.slice(
-        indexOfFirstQuestion,
-        indexOfLastQuestion
-    );
+    const currentQuestions = questions.slice(indexOfFirstQuestion, indexOfLastQuestion);
 
-    // Xử lý khi người dùng nhấn vào một số trang
+    // Handle page number click
     const handlePageClick = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
-    // Tạo dãy số trang
+    // Create page numbers for pagination
     const totalPages = Math.ceil(questions.length / questionsPerPage);
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i);
-    }
+    const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     return (
         <div>
@@ -107,43 +93,29 @@ function QuestionList() {
                                         : "Read more"}
                                 </Button>
 
-                                {/* Hiển thị câu trả lời nếu có */}
-                                {expandedAnswers[question.id] &&
-                                    answers[question.id] &&
-                                    answers[question.id].length > 0 && (
-                                        <div className="mt-3">
-                                            <h5>Answers:</h5>
-                                            {answers[question.id].map(
-                                                (answer, index) => (
-                                                    <Card
-                                                        key={index}
-                                                        className="mb-3"
-                                                    >
-                                                        <Card.Body>
-                                                            <Card.Text>
-                                                                {answer.content}
-                                                            </Card.Text>
-                                                            <p className="text-muted">
-                                                                Answered by user{" "}
-                                                                {answer.userId}{" "}
-                                                                on{" "}
-                                                                {
-                                                                    answer.createdDate
-                                                                }
-                                                            </p>
-                                                        </Card.Body>
-                                                    </Card>
-                                                )
-                                            )}
-                                        </div>
-                                    )}
+                                {/* Display answers if expanded */}
+                                {expandedAnswers[question.id] && answers[question.id] && (
+                                    <div className="mt-3">
+                                        <h5>Answers:</h5>
+                                        {answers[question.id].map((answer, index) => (
+                                            <Card key={index} className="mb-3">
+                                                <Card.Body>
+                                                    <Card.Text>{answer.content}</Card.Text>
+                                                    <p className="text-muted">
+                                                        Answered by user {answer.userId} on {answer.createdDate}
+                                                    </p>
+                                                </Card.Body>
+                                            </Card>
+                                        ))}
+                                    </div>
+                                )}
                             </Col>
                         </Row>
                     </Card.Body>
                 </Card>
             ))}
 
-            {/* Phân trang bằng các số trang */}
+            {/* Pagination buttons */}
             <div className="mt-3">
                 {pageNumbers.map((number) => (
                     <Button

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "./util.css";
 import "./main.css";
 
@@ -18,13 +17,11 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Kiểm tra các trường bắt buộc
     if (!username || !email || !password) {
       setMessage("All fields are required.");
       return;
     }
 
-    // Kiểm tra điều kiện mật khẩu
     if (!validatePassword(password)) {
       setMessage(
         "Password must contain at least 1 uppercase letter and 1 special character."
@@ -33,21 +30,27 @@ const Register = () => {
     }
 
     try {
-      // Gửi yêu cầu POST đến API giả lập
-      const response = await axios.post("http://localhost:9999/users", {
-        username,
-        email,
-        passwordHash: password, // Lưu mật khẩu dưới dạng chuỗi đơn giản
-        profilePicture: "https://example.com/default-profile.jpg", // Ảnh mặc định
-        joinDate: new Date().toISOString().split("T")[0], // Ngày hiện tại
+      const response = await fetch("http://localhost:9999/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          passwordHash: password, // Lưu mật khẩu dưới dạng chuỗi đơn giản
+          profilePicture: "https://example.com/default-profile.jpg", // Ảnh mặc định
+          joinDate: new Date().toISOString().split("T")[0], // Ngày hiện tại
+        }),
       });
 
-      if (response.status === 201) {
+      if (response.ok) {
         setMessage("Registration successful. Please log in!");
-        // Xóa dữ liệu form sau khi đăng ký thành công
         setUsername("");
         setEmail("");
         setPassword("");
+      } else {
+        setMessage("An error occurred. Please try again.");
       }
     } catch (error) {
       setMessage("An error occurred. Please try again.");
@@ -125,7 +128,6 @@ const Register = () => {
               ></span>
             </div>
 
-            {/* Hiển thị thông báo */}
             {message && (
               <div
                 style={{

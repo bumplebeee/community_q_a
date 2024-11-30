@@ -21,7 +21,7 @@ function Footer() {
                         <ul style={{ listStyleType: "none", padding: 0 }}>
                             <li>
                                 <a
-                                    href="/"
+                                    href="/home"
                                     style={{
                                         color: "#fff",
                                         textDecoration: "none",

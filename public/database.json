@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "1",
-      "username": "john_doe",
+      "username": "john_doee",
       "email": "john.doe@example.com",
       "passwordHash": "hashed_password_1",
       "profilePicture": "https://example.com/profiles/john.jpg",

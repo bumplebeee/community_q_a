@@ -13,6 +13,7 @@ import Tags from "./view/Tags";
 import Users from "./view/Users";
 import Footer from "./view/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
+import EditProfile from "./view/Profile";
 
 // Layout for pages after login
 const MainLayout = ({ children, user, onLogout }) => {
@@ -29,7 +30,8 @@ const MainLayout = ({ children, user, onLogout }) => {
 };
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
+  
   const navigate = useNavigate(); // Sử dụng useNavigate
 
   const handleLogin = (username) => {
@@ -113,6 +115,23 @@ function App() {
             </MainLayout>
           ) : (
             <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+          )
+        }
+      />
+      <Route
+        path="/edit-profile"
+        element={
+          user ? (
+            <MainLayout user={user} onLogout={handleLogout}>
+              <EditProfile
+                user={user}
+                onProfileUpdate={(updatedProfile) => {
+                  setUser(updatedProfile.username); // Cập nhật username trong state
+                }}
+              />
+            </MainLayout>
+          ) : (
+            <Navigate to="/login" />
           )
         }
       />

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function NavbarComponent({ user, onLogout }) {
   const handleLogout = () => {
-    onLogout(); // Gọi hàm onLogout từ App.js để đăng xuất
+    onLogout(); // Call onLogout from App.js to log out
   };
 
   return (
@@ -25,8 +25,10 @@ function NavbarComponent({ user, onLogout }) {
         <Nav.Link as={Link} to="/users">
           Users
         </Nav.Link>
+        <Nav.Link as={Link} to="/add-post">
+          Add Post
+        </Nav.Link>
       </Nav>
-
 
       <Form className="d-flex me-2">
         <FormControl
@@ -38,33 +40,19 @@ function NavbarComponent({ user, onLogout }) {
           Search
         </Button>
       </Form>
-    return (
-        <Navbar bg="dark" variant="dark" expand="lg">
-            <Navbar.Brand as={Link} to="/">
-                Community QA
-            </Navbar.Brand>
-            <Nav className="me-auto">
-                <Nav.Link as={Link} to="/home">
-                    Home
-                </Nav.Link>
-                <Nav.Link as={Link} to="/questions">
-                    Questions
-                </Nav.Link>
-                <Nav.Link as={Link} to="/tags">
-                    Tags
-                </Nav.Link>
-                <Nav.Link as={Link} to="/users">
-                    Users
-                </Nav.Link>
-                <Nav.Link as={Link} to="/add-post">
-                    Add Post
-                </Nav.Link>
-            </Nav>
 
-      {/* Hiển thị thông tin người dùng hoặc nút Login/Sign Up */}
+      {/* Display user info or Login/Sign Up buttons */}
       {user ? (
         <>
           <span className="text-white me-2">Hello, {user}</span>
+          <Button
+            variant="outline-light"
+            className="me-2"
+            as={Link}
+            to="/edit-profile"
+          >
+            Profile
+          </Button>
           <Button variant="outline-light" onClick={handleLogout}>
             LogOut
           </Button>

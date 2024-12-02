@@ -1,28 +1,27 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import React, { useState } from "react";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom"; // Thêm Navigate để điều hướng
 import LoginScreen from "./login_register/LoginScreen";
 import ForgotPassword from "./login_register/ForgotPassword";
 import Register from "./login_register/Register";
 import AddPost from "./login_register/AddPost";
-import Navbar from "./view/Navbar";
+import NavbarComponent from "./view/Navbar";
 import Sidebar from "./view/Sidebar";
 import Home from "./view/Home";
 import Questions from "./view/Questions";
 import Tags from "./view/Tags";
 import Users from "./view/Users";
 import Footer from "./view/Footer";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // Layout for pages after login
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, user, onLogout }) => {
   return (
     <>
-      <Navbar />
+      <NavbarComponent user={user} onLogout={onLogout} />
       <div className="d-flex">
         <Sidebar />
-        <main style={{ flex: 1, padding: "20px" }}>
-          {children}
-        </main>
+        <main style={{ flex: 1, padding: "20px" }}>{children}</main>
       </div>
       <Footer />
     </>
@@ -30,57 +29,94 @@ const MainLayout = ({ children }) => {
 };
 
 function App() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate(); // Sử dụng useNavigate
+
+  const handleLogin = (username) => {
+    setUser(username); // Lưu tên người dùng vào state
+    navigate("/home"); // Chuyển hướng sang trang home
+  };
+
+  const handleLogout = () => {
+    setUser(null); // Xóa thông tin người dùng
+    navigate("/"); // Quay lại trang login
+  };
+
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<LoginScreen />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/sign-up" element={<Register />} />
-        
-        {/* Protected Routes */}
-        <Route
-          path="/home"
-          element={
-            <MainLayout>
+    <Routes>
+      {/* Trang mặc định là Home */}
+      <Route
+        path="/"
+        element={<Navigate to="/home" />} // Điều hướng tới /home khi truy cập vào trang mặc định
+      />
+
+      {/* Public Routes */}
+      <Route path="/login" element={<LoginScreen onLogin={handleLogin} />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/sign-up" element={<Register />} />
+
+      {/* Protected Routes */}
+      <Route
+        path="/home"
+        element={
+          user ? (
+            <MainLayout user={user} onLogout={handleLogout}>
               <Home />
             </MainLayout>
-          }
-        />
-        <Route
-          path="/questions"
-          element={
-            <MainLayout>
+          ) : (
+            <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+          )
+        }
+      />
+      <Route
+        path="/questions"
+        element={
+          user ? (
+            <MainLayout user={user} onLogout={handleLogout}>
               <Questions />
             </MainLayout>
-          }
-        />
-        <Route
-          path="/tags"
-          element={
-            <MainLayout>
+          ) : (
+            <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+          )
+        }
+      />
+      <Route
+        path="/tags"
+        element={
+          user ? (
+            <MainLayout user={user} onLogout={handleLogout}>
               <Tags />
             </MainLayout>
-          }
-        />
-        <Route
-          path="/users"
-          element={
-            <MainLayout>
+          ) : (
+            <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+          )
+        }
+      />
+      <Route
+        path="/users"
+        element={
+          user ? (
+            <MainLayout user={user} onLogout={handleLogout}>
               <Users />
             </MainLayout>
-          }
-        />
-        <Route
-          path="/add-post"
-          element={
-            <MainLayout>
+          ) : (
+            <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+          )
+        }
+      />
+      <Route
+        path="/add-post"
+        element={
+          user ? (
+            <MainLayout user={user} onLogout={handleLogout}>
               <AddPost />
             </MainLayout>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+          ) : (
+            <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+          )
+        }
+      />
+    </Routes>
   );
 }
 

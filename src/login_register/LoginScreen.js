@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "./util.css";
 import "./main.css";
 import { Link } from "react-router-dom";
-const LoginScreen = () => {
+
+const LoginScreen = ({ onLogin }) => {
+  // Nhận props onLogin từ App.js
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,12 +19,13 @@ const LoginScreen = () => {
       if (!response.ok) {
         throw new Error("Failed to load data");
       }
-  
+
       const data = await response.json(); // Parse dữ liệu JSON
-  
+
       // Kiểm tra thông tin người dùng
       const user = data.users.find((user) => user.username === username);
       if (user && user.passwordHash === password) {
+        onLogin(user.username); // Gửi tên người dùng lên App.js khi đăng nhập thành công
         navigate("/home");
       } else {
         setError(

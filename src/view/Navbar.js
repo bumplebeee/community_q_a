@@ -31,6 +31,9 @@ function NavbarComponent() {
                 <Nav.Link as={Link} to="/users">
                     Users
                 </Nav.Link>
+                <Nav.Link as={Link} to="/add-post">
+                    Add Post
+                </Nav.Link>
             </Nav>
 
             <Form className="d-flex me-2" onSubmit={handleSearch}>

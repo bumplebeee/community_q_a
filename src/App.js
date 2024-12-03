@@ -31,19 +31,25 @@ const MainLayout = ({ children, user, onLogout }) => {
 
 function App() {
   const [user, setUser] = useState(null);
-  
+
   const navigate = useNavigate(); // Sử dụng useNavigate
 
-  const handleLogin = (username) => {
-    setUser(username); // Lưu tên người dùng vào state
-    navigate("/home"); // Chuyển hướng sang trang home
+  const handleLogin = ({ username, email, joinDate }) => {
+    setUser({ username, email, joinDate }); // Lưu cả username và email
+    navigate("/home");
   };
+  console.log(user);
 
   const handleLogout = () => {
     setUser(null); // Xóa thông tin người dùng
     navigate("/"); // Quay lại trang login
   };
-
+   const handleProfileUpdate = (updatedProfile) => {
+     setUser((prevUser) => ({
+       ...prevUser,
+       ...updatedProfile, // Update user profile state
+     }));
+   };
   return (
     <Routes>
       {/* Trang mặc định là Home */}
@@ -123,12 +129,7 @@ function App() {
         element={
           user ? (
             <MainLayout user={user} onLogout={handleLogout}>
-              <EditProfile
-                user={user}
-                onProfileUpdate={(updatedProfile) => {
-                  setUser(updatedProfile.username); // Cập nhật username trong state
-                }}
-              />
+              <EditProfile user={user} onProfileUpdate={handleProfileUpdate} />
             </MainLayout>
           ) : (
             <Navigate to="/login" />

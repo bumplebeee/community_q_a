@@ -1,59 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
-import axios from "axios";
 
-function EditProfile() {
-  const [userData, setUserData] = useState({
-    username: "",
-    firstName: "",
-    lastName: "",
-    organization: "",
-    location: "",
-    email: "",
-    phone: "",
-    birthday: "",
-  });
+function EditProfile({ user, onProfileUpdate }) {
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
+  const [profilePic, setProfilePic] = useState("");
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Fetch user data from API
-  useEffect(() => {
-    axios
-      .get("http://localhost:9999/users/1")
-      .then((response) => {
-        setUserData(response.data); // Set user data
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
-  }, []);
-
-  // Handle input changes
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setUserData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
+  const handleSaveChanges = () => {
+    const updatedProfile = { username, email, joinDate: user.joinDate };
+    onProfileUpdate(updatedProfile); // Pass updated profile to parent component
+    alert("Profile updated successfully!");
   };
 
-  // Save changes to API
-  const handleSave = () => {
-    axios
-      .put("http://localhost:9999/users/1", userData)
-      .then((response) => {
-        alert("Profile updated successfully!");
-      })
-      .catch((error) => {
-        console.error("Error updating profile:", error);
-        alert("Failed to update profile.");
-      });
+  const handleProfilePicChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfilePic(URL.createObjectURL(file)); // Preview the image
+    }
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <Container className="px-4 mt-4">
@@ -65,16 +29,22 @@ function EditProfile() {
             <Card.Body className="text-center">
               <img
                 className="img-account-profile rounded-circle mb-2"
-                src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                src={
+                  profilePic ||
+                  "http://bootdey.com/img/Content/avatar/avatar1.png"
+                }
                 alt="User"
                 style={{ width: "150px", height: "150px", objectFit: "cover" }}
               />
               <div className="small text-muted mb-4">
                 JPG or PNG no larger than 5 MB
               </div>
-              <Button variant="primary" type="button">
-                Upload new image
-              </Button>
+              <Form.Control
+                type="file"
+                accept="image/*"
+                onChange={handleProfilePicChange}
+                className="mb-2"
+              />
             </Card.Body>
           </Card>
         </Col>
@@ -89,38 +59,26 @@ function EditProfile() {
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="text"
-                    id="username"
-                    value={userData.username}
-                    onChange={handleChange}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                 </Form.Group>
 
-                <Row className="gx-3 mb-3">
-                  <Col md={6}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Email Address</Form.Label>
-                      <Form.Control
-                        type="email"
-                        id="email"
-                        value={userData.email}
-                        onChange={handleChange}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group>
-                      <Form.Label>Join Date</Form.Label>
-                      <Form.Control
-                        type="text"
-                        id="birthday"
-                        disabled
-                        value={userData.joinDate}
-                        onChange={handleChange}
-                      />
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Button variant="primary" onClick={handleSave}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Email Address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Join Date</Form.Label>
+                  <Form.Control type="text" value={user.joinDate} disabled />
+                </Form.Group>
+
+                <Button variant="primary" onClick={handleSaveChanges}>
                   Save Changes
                 </Button>
               </Form>

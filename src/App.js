@@ -30,7 +30,7 @@ const MainLayout = ({ children, user, onLogout }) => {
 };
 
 function App() {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
   
   const navigate = useNavigate(); // Sử dụng useNavigate
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";  // Import useNavigate
 import "./AddPost.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -10,6 +11,7 @@ const AddPost = () => {
     tags: "",
   });
   const [userId, setUserId] = useState(null); // State to store userId
+  const navigate = useNavigate(); // Hook to navigate
 
   // Fetch tags from database.json
   useEffect(() => {
@@ -75,6 +77,9 @@ const AddPost = () => {
       const result = await response.json();
       console.log("Post created:", result);
       alert("Question created successfully!");
+
+      // Redirect to /home after successful post creation
+      navigate("/home");
 
       // Reset form
       setFormData({

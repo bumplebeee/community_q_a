@@ -1,6 +1,5 @@
-import "./App.css";
-import React, { useState } from "react";
-import { Route, Routes, useNavigate, Navigate } from "react-router-dom"; // Thêm Navigate để điều hướng
+import React, { useState, useEffect } from "react";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import LoginScreen from "./login_register/LoginScreen";
 import ForgotPassword from "./login_register/ForgotPassword";
 import Register from "./login_register/Register";
@@ -12,8 +11,8 @@ import Questions from "./view/Questions";
 import Tags from "./view/Tags";
 import Users from "./view/Users";
 import Footer from "./view/Footer";
-import "bootstrap/dist/css/bootstrap.min.css";
 import EditProfile from "./view/Profile";
+import QuestionDetail from "./view/QuestionDetail"; // Import trang chi tiết câu hỏi
 
 // Layout for pages after login
 const MainLayout = ({ children, user, onLogout }) => {
@@ -31,7 +30,10 @@ const MainLayout = ({ children, user, onLogout }) => {
 
 function App() {
   const [user, setUser] = useState(null);
-  
+  const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState({});
+  const [users, setUsers] = useState([]);
+
   const navigate = useNavigate(); // Sử dụng useNavigate
 
   const handleLogin = (username) => {
@@ -44,20 +46,24 @@ function App() {
     navigate("/"); // Quay lại trang login
   };
 
+  useEffect(() => {
+    // Giả sử bạn đã lấy dữ liệu từ một API hoặc file JSON
+    fetch("/database.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setQuestions(data.questions);
+        setAnswers(data.answers);
+        setUsers(data.users);
+      })
+      .catch((error) => console.error("Error loading data:", error));
+  }, []);
+
   return (
     <Routes>
-      {/* Trang mặc định là Home */}
-      <Route
-        path="/"
-        element={<Navigate to="/home" />} // Điều hướng tới /home khi truy cập vào trang mặc định
-      />
-
-      {/* Public Routes */}
+      <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/login" element={<LoginScreen onLogin={handleLogin} />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/sign-up" element={<Register />} />
-
-      {/* Protected Routes */}
       <Route
         path="/home"
         element={
@@ -66,7 +72,7 @@ function App() {
               <Home />
             </MainLayout>
           ) : (
-            <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+            <Navigate to="/login" />
           )
         }
       />
@@ -75,10 +81,10 @@ function App() {
         element={
           user ? (
             <MainLayout user={user} onLogout={handleLogout}>
-              <Questions />
+              <Questions questions={questions} />
             </MainLayout>
           ) : (
-            <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+            <Navigate to="/login" />
           )
         }
       />
@@ -90,7 +96,7 @@ function App() {
               <Tags />
             </MainLayout>
           ) : (
-            <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+            <Navigate to="/login" />
           )
         }
       />
@@ -102,7 +108,7 @@ function App() {
               <Users />
             </MainLayout>
           ) : (
-            <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+            <Navigate to="/login" />
           )
         }
       />
@@ -114,7 +120,7 @@ function App() {
               <AddPost />
             </MainLayout>
           ) : (
-            <Navigate to="/login" /> // Nếu chưa đăng nhập, chuyển hướng về trang login
+            <Navigate to="/login" />
           )
         }
       />
@@ -128,6 +134,23 @@ function App() {
                 onProfileUpdate={(updatedProfile) => {
                   setUser(updatedProfile.username); // Cập nhật username trong state
                 }}
+              />
+            </MainLayout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      {/* Route cho trang chi tiết câu hỏi */}
+      <Route
+        path="/question/:id"
+        element={
+          user ? (
+            <MainLayout user={user} onLogout={handleLogout}>
+              <QuestionDetail
+                questions={questions}
+                answers={answers}
+                users={users}
               />
             </MainLayout>
           ) : (

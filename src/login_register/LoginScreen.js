@@ -26,9 +26,9 @@
         const user = data.users.find((user) => user.username === username);
         if (user && user.passwordHash === password) {
           onLogin({
+            id:user.id,
             username: user.username,
-            email: user.email,
-            joinDate: user.joinDate,
+          
           }); // Gửi tên người dùng lên App.js khi đăng nhập thành công
           navigate("/home");
         } else {

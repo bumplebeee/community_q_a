@@ -34,8 +34,8 @@ function App() {
 
   const navigate = useNavigate(); // Sử dụng useNavigate
 
-  const handleLogin = ({ username, email, joinDate }) => {
-    setUser({ username, email, joinDate }); // Lưu cả username và email
+  const handleLogin = ({ id,username }) => {
+    setUser({ id,username }); // Lưu cả username và email
     navigate("/home");
   };
   console.log(user);

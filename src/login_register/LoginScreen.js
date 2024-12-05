@@ -5,7 +5,6 @@ import "./main.css";
 import { Link } from "react-router-dom";
 
 const LoginScreen = ({ onLogin }) => {
-  // Nhận props onLogin từ App.js
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,17 +13,19 @@ const LoginScreen = ({ onLogin }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // Fetch dữ liệu từ file database.json
       const response = await fetch("/database.json");
       if (!response.ok) {
         throw new Error("Failed to load data");
       }
 
-      const data = await response.json(); // Parse dữ liệu JSON
+      const data = await response.json();
 
       // Kiểm tra thông tin người dùng
       const user = data.users.find((user) => user.username === username);
       if (user && user.passwordHash === password) {
+        // Lưu userId vào localStorage
+        localStorage.setItem("userId", user.id);  // Lưu userId vào localStorage
+
         onLogin(user.username); // Gửi tên người dùng lên App.js khi đăng nhập thành công
         navigate("/home");
       } else {

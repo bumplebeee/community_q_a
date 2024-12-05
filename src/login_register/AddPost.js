@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./AddPost.css"; // Ensure your styles are imported
-import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap
+import { useNavigate } from "react-router-dom";  // Import useNavigate
+import "./AddPost.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const AddPost = () => {
   const [tags, setTags] = useState([]); // State to store tags
@@ -9,6 +10,8 @@ const AddPost = () => {
     content: "",
     tags: "",
   });
+  const [userId, setUserId] = useState(null); // State to store userId
+  const navigate = useNavigate(); // Hook to navigate
 
   // Fetch tags from database.json
   useEffect(() => {
@@ -26,6 +29,12 @@ const AddPost = () => {
     };
 
     fetchTags();
+
+    // Get userId from localStorage if it's stored
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    }
   }, []);
 
   // Handle input changes
@@ -35,19 +44,52 @@ const AddPost = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simulate saving data
-    console.log("Form submitted with data:", formData);
-    alert("Question created successfully!");
+    if (!userId) {
+      alert("You must be logged in to create a post.");
+      return;
+    }
 
-    // Reset form
-    setFormData({
-      title: "",
-      content: "",
-      tags: "",
-    });
+    const newPost = {
+      title: formData.title,
+      content: formData.content,
+      tags: [parseInt(formData.tags)], // Assuming tags are stored as ID (numbers) in the JSON
+      userId: userId, // Attach userId here
+      createdDate: new Date().toISOString().split("T")[0], // Getting current date in yyyy-mm-dd format
+    };
+
+    // Simulate saving data by making a POST request to the API
+    try {
+      const response = await fetch("http://localhost:5000/questions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPost),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create post");
+      }
+
+      const result = await response.json();
+      console.log("Post created:", result);
+      alert("Question created successfully!");
+
+      // Redirect to /home after successful post creation
+      navigate("/home");
+
+      // Reset form
+      setFormData({
+        title: "",
+        content: "",
+        tags: "",
+      });
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
   };
 
   return (
@@ -104,7 +146,7 @@ const AddPost = () => {
               >
                 <option value="">Select a tag</option>
                 {tags.map((tag) => (
-                  <option key={tag.id} value={tag.name}>
+                  <option key={tag.id} value={tag.id}>
                     {tag.name}
                   </option>
                 ))}

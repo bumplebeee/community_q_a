@@ -30,21 +30,32 @@ const MainLayout = ({ children, user, onLogout }) => {
 
 function App() {
   const [user, setUser] = useState(null);
+
+
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [users, setUsers] = useState([]);
 
   const navigate = useNavigate(); // Sử dụng useNavigate
 
-  const handleLogin = (username) => {
-    setUser(username); // Lưu tên người dùng vào state
-    navigate("/home"); // Chuyển hướng sang trang home
+  const handleLogin = ({ id,username }) => {
+    setUser({ id,username }); // Lưu cả username và email
+    navigate("/home");
   };
+  console.log(user);
 
   const handleLogout = () => {
     setUser(null); // Xóa thông tin người dùng
     navigate("/"); // Quay lại trang login
   };
+
+   const handleProfileUpdate = (updatedProfile) => {
+     setUser((prevUser) => ({
+       ...prevUser,
+       ...updatedProfile, // Update user profile state
+     }));
+   };
+
 
   useEffect(() => {
     // Giả sử bạn đã lấy dữ liệu từ một API hoặc file JSON
@@ -129,12 +140,7 @@ function App() {
         element={
           user ? (
             <MainLayout user={user} onLogout={handleLogout}>
-              <EditProfile
-                user={user}
-                onProfileUpdate={(updatedProfile) => {
-                  setUser(updatedProfile.username); // Cập nhật username trong state
-                }}
-              />
+              <EditProfile user={user} onProfileUpdate={handleProfileUpdate} />
             </MainLayout>
           ) : (
             <Navigate to="/login" />

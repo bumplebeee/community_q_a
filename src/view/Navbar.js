@@ -33,7 +33,7 @@ function NavbarComponent({ user, onLogout }) {
       {/* Display user info or Login/Sign Up buttons */}
       {user ? (
         <>
-          <span className="text-white me-2">Hello, {user}</span>
+          <span className="text-white me-2">Hello, {user.username}</span>
           <Button
             variant="outline-light"
             className="me-2"

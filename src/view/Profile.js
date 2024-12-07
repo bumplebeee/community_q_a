@@ -1,59 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
-import axios from "axios";
 
-function EditProfile() {
-  const [userData, setUserData] = useState({
-    username: "",
-    firstName: "",
-    lastName: "",
-    organization: "",
-    location: "",
-    email: "",
-    phone: "",
-    birthday: "",
-  });
+function EditProfile({ user }) {
+  const [userData, setUserData] = useState(null);
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Fetch user data from API
   useEffect(() => {
-    axios
-      .get("http://localhost:9999/users/1")
-      .then((response) => {
-        setUserData(response.data); // Set user data
-        setIsLoading(false);
+    fetch("http://localhost:9999/users")
+      .then((resp) => resp.json())
+      .then((result) => {
+        const matchingUser = result.find((u) => u.id === user.id);
+        setUserData(matchingUser);
       })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
-  }, []);
+      .catch((err) => console.error(err));
+  }, [user.id]);
 
-  // Handle input changes
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setUserData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
+    const { name, value } = e.target;
+    setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Save changes to API
   const handleSave = () => {
-    axios
-      .put("http://localhost:9999/users/1", userData)
-      .then((response) => {
+    fetch(`http://localhost:9999/users/${user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((resp) => resp.json())
+      .then((updatedUser) => {
         alert("Profile updated successfully!");
+        setUserData(updatedUser); // Update state with the saved changes
       })
-      .catch((error) => {
-        console.error("Error updating profile:", error);
-        alert("Failed to update profile.");
-      });
+      .catch((err) => console.error("Error updating profile:", err));
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <Container className="px-4 mt-4">
@@ -65,16 +45,14 @@ function EditProfile() {
             <Card.Body className="text-center">
               <img
                 className="img-account-profile rounded-circle mb-2"
-                src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                src={"http://bootdey.com/img/Content/avatar/avatar1.png"}
                 alt="User"
                 style={{ width: "150px", height: "150px", objectFit: "cover" }}
               />
               <div className="small text-muted mb-4">
                 JPG or PNG no larger than 5 MB
               </div>
-              <Button variant="primary" type="button">
-                Upload new image
-              </Button>
+              <Form.Control type="file" accept="image/*" className="mb-2" />
             </Card.Body>
           </Card>
         </Col>
@@ -84,46 +62,54 @@ function EditProfile() {
           <Card className="mb-4">
             <Card.Header>Account Details</Card.Header>
             <Card.Body>
-              <Form>
-                <Form.Group className="mb-3">
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
-                    type="text"
-                    id="username"
-                    value={userData.username}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+              {userData ? (
+                <Form>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Username</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="username"
+                      value={userData.username || ""}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
 
-                <Row className="gx-3 mb-3">
-                  <Col md={6}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Email Address</Form.Label>
-                      <Form.Control
-                        type="email"
-                        id="email"
-                        value={userData.email}
-                        onChange={handleChange}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group>
-                      <Form.Label>Join Date</Form.Label>
-                      <Form.Control
-                        type="text"
-                        id="birthday"
-                        disabled
-                        value={userData.joinDate}
-                        onChange={handleChange}
-                      />
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Button variant="primary" onClick={handleSave}>
-                  Save Changes
-                </Button>
-              </Form>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      value={userData.email || ""}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+
+                  <Form.Group className="mb-3">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="passwordHash"
+                      value={userData.passwordHash || ""}
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+
+                  <Form.Group className="mb-3">
+                    <Form.Label>Join Date</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={userData.joinDate || ""}
+                      disabled
+                    />
+                  </Form.Group>
+
+                  <Button variant="primary" onClick={handleSave}>
+                    Save Changes
+                  </Button>
+                </Form>
+              ) : (
+                <div>Loading user data...</div>
+              )}
             </Card.Body>
           </Card>
         </Col>

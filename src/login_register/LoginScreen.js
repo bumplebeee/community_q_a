@@ -47,6 +47,31 @@
           );
         }
       } catch (error) {
+const LoginScreen = ({ onLogin }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/database.json");
+      if (!response.ok) {
+        throw new Error("Failed to load data");
+      }
+
+      const data = await response.json();
+
+      // Kiểm tra thông tin người dùng
+      const user = data.users.find((user) => user.username === username);
+      if (user && user.passwordHash === password) {
+        // Lưu userId vào localStorage
+        localStorage.setItem("userId", user.id);  // Lưu userId vào localStorage
+
+        onLogin(user.username); // Gửi tên người dùng lên App.js khi đăng nhập thành công
+        navigate("/home");
+      } else {
         setError(
           <p
             style={{

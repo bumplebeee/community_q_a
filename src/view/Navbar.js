@@ -30,17 +30,6 @@ function NavbarComponent({ user, onLogout }) {
         </Nav.Link>
       </Nav>
 
-      <Form className="d-flex me-2">
-        <FormControl
-          type="search"
-          placeholder="Search questions..."
-          className="me-2"
-        />
-        <Button type="submit" variant="outline-light">
-          Search
-        </Button>
-      </Form>
-
       {/* Display user info or Login/Sign Up buttons */}
       {user ? (
         <>

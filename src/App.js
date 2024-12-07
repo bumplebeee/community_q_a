@@ -12,7 +12,8 @@ import Tags from "./view/Tags";
 import Users from "./view/Users";
 import Footer from "./view/Footer";
 import EditProfile from "./view/Profile";
-import QuestionDetail from "./view/QuestionDetail"; // Import trang chi tiết câu hỏi
+import QuestionDetail from "./view/QuestionDetail"; 
+import MyPost from "./view/MyPost"; 
 
 // Layout for pages after login
 const MainLayout = ({ children, user, onLogout }) => {
@@ -30,34 +31,45 @@ const MainLayout = ({ children, user, onLogout }) => {
 
 function App() {
   const [user, setUser] = useState(null);
-
-
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [users, setUsers] = useState([]);
-
   const navigate = useNavigate(); // Sử dụng useNavigate
 
-  const handleLogin = ({ id,username }) => {
-    setUser({ id,username }); // Lưu cả username và email
+  const handleLogin = ({ id, username }) => {
+    setUser({ id, username }); // Lưu cả username và email
+    localStorage.setItem("userId", id); // Lưu userId vào localStorage
     navigate("/home");
   };
-  console.log(user);
 
   const handleLogout = () => {
     setUser(null); // Xóa thông tin người dùng
+    localStorage.removeItem("userId"); // Xóa thông tin userId khỏi localStorage
     navigate("/"); // Quay lại trang login
   };
 
-   const handleProfileUpdate = (updatedProfile) => {
-     setUser((prevUser) => ({
-       ...prevUser,
-       ...updatedProfile, // Update user profile state
-     }));
-   };
-
+  const handleProfileUpdate = (updatedProfile) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      ...updatedProfile, // Update user profile state
+    }));
+  };
 
   useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      // Tìm người dùng trong data và thiết lập lại thông tin user từ localStorage
+      fetch("/database.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const user = data.users.find((u) => u.id === storedUserId);
+          if (user) {
+            setUser(user);
+          }
+        })
+        .catch((error) => console.error("Error loading user data:", error));
+    }
+
     // Giả sử bạn đã lấy dữ liệu từ một API hoặc file JSON
     fetch("/database.json")
       .then((response) => response.json())
@@ -75,54 +87,48 @@ function App() {
       <Route path="/login" element={<LoginScreen onLogin={handleLogin} />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/sign-up" element={<Register />} />
+
+      {/* Trang Home, luôn hiển thị */}
       <Route
         path="/home"
         element={
-          user ? (
-            <MainLayout user={user} onLogout={handleLogout}>
-              <Home />
-            </MainLayout>
-          ) : (
-            <Navigate to="/login" />
-          )
+          <MainLayout user={user} onLogout={handleLogout}>
+            <Home />
+          </MainLayout>
         }
       />
+
+      {/* Trang Questions, luôn hiển thị */}
       <Route
         path="/questions"
         element={
-          user ? (
-            <MainLayout user={user} onLogout={handleLogout}>
-              <Questions questions={questions} />
-            </MainLayout>
-          ) : (
-            <Navigate to="/login" />
-          )
+          <MainLayout user={user} onLogout={handleLogout}>
+            <Questions questions={questions} />
+          </MainLayout>
         }
       />
+
+      {/* Trang Tags */}
       <Route
         path="/tags"
         element={
-          user ? (
-            <MainLayout user={user} onLogout={handleLogout}>
-              <Tags />
-            </MainLayout>
-          ) : (
-            <Navigate to="/login" />
-          )
+          <MainLayout user={user} onLogout={handleLogout}>
+            <Tags />
+          </MainLayout>
         }
       />
+
+      {/* Trang Users */}
       <Route
         path="/users"
         element={
-          user ? (
-            <MainLayout user={user} onLogout={handleLogout}>
-              <Users />
-            </MainLayout>
-          ) : (
-            <Navigate to="/login" />
-          )
+          <MainLayout user={user} onLogout={handleLogout}>
+            <Users />
+          </MainLayout>
         }
       />
+
+      {/* Trang AddPost, chỉ hiển thị khi người dùng đã đăng nhập */}
       <Route
         path="/add-post"
         element={
@@ -135,6 +141,8 @@ function App() {
           )
         }
       />
+
+      {/* Trang EditProfile */}
       <Route
         path="/edit-profile"
         element={
@@ -147,17 +155,28 @@ function App() {
           )
         }
       />
-      {/* Route cho trang chi tiết câu hỏi */}
+
+      {/* Trang chi tiết câu hỏi */}
       <Route
         path="/question/:id"
         element={
+          <MainLayout user={user} onLogout={handleLogout}>
+            <QuestionDetail
+              questions={questions}
+              answers={answers}
+              users={users}
+            />
+          </MainLayout>
+        }
+      />
+
+      {/* Trang MyPost, chỉ hiển thị khi người dùng đã đăng nhập */}
+      <Route
+        path="/my-post"
+        element={
           user ? (
             <MainLayout user={user} onLogout={handleLogout}>
-              <QuestionDetail
-                questions={questions}
-                answers={answers}
-                users={users}
-              />
+              <MyPost user={user} questions={questions} />
             </MainLayout>
           ) : (
             <Navigate to="/login" />

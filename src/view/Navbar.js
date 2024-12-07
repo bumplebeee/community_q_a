@@ -1,3 +1,4 @@
+// src/view/Navbar.js
 import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -25,12 +26,21 @@ function NavbarComponent({ user, onLogout }) {
         <Nav.Link as={Link} to="/users">
           Users
         </Nav.Link>
-        <Nav.Link as={Link} to="/add-post">
-          Add Post
-        </Nav.Link>
+
+        {/* Chỉ hiển thị AddPost và MyPost khi người dùng đã đăng nhập */}
+        {user && (
+          <>
+            <Nav.Link as={Link} to="/add-post">
+              Add Post
+            </Nav.Link>
+            <Nav.Link as={Link} to="/my-post">
+              My Post
+            </Nav.Link>
+          </>
+        )}
       </Nav>
 
-      {/* Display user info or Login/Sign Up buttons */}
+      {/* Hiển thị thông tin người dùng hoặc Login/Sign Up */}
       {user ? (
         <>
           <span className="text-white me-2">Hello, {user.username}</span>

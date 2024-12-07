@@ -29,7 +29,7 @@ const LoginScreen = ({ onLogin }) => {
         // Lưu userId vào localStorage
         localStorage.setItem("userId", user.id);  // Lưu userId vào localStorage
 
-        onLogin(user.username); // Gửi tên người dùng lên App.js khi đăng nhập thành công
+        onLogin(user); // Gửi đối tượng user lên App.js khi đăng nhập thành công
         navigate("/home");
       } else {
         setError(

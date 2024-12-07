@@ -62,7 +62,7 @@ const AddPost = () => {
 
     // Simulate saving data by making a POST request to the API
     try {
-      const response = await fetch("http://localhost:5000/questions", {
+      const response = await fetch("http://localhost:9999/questions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

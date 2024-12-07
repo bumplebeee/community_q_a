@@ -38,7 +38,7 @@ const Register = () => {
         body: JSON.stringify({
           username,
           email,
-          passwordHash: password, // Lưu mật khẩu dưới dạng chuỗi đơn giản
+          password: password, // Lưu mật khẩu dưới dạng chuỗi đơn giản
           profilePicture: "https://example.com/default-profile.jpg", // Ảnh mặc định
           joinDate: new Date().toISOString().split("T")[0], // Ngày hiện tại
         }),

@@ -23,7 +23,9 @@ const LoginScreen = ({ onLogin }) => {
 
       // Kiểm tra thông tin người dùng
       const user = data.users.find((user) => user.username === username);
-      if (user && user.passwordHash === password) {
+
+      // Kiểm tra mật khẩu
+      if (user && user.password === password) {
         // Lưu userId vào localStorage
         localStorage.setItem("userId", user.id);  // Lưu userId vào localStorage
 
@@ -40,7 +42,7 @@ const LoginScreen = ({ onLogin }) => {
               fontSize: "16px",
             }}
           >
-            Incorrect account or password!
+            Incorrect username or password!
           </p>
         );
       }

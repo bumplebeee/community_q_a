@@ -4,7 +4,7 @@
       "id": "1",
       "username": "john_doee",
       "email": "john.doe@example.com",
-      "passwordHash": "hashed_password_1",
+      "password": "hashed_password_1",
       "profilePicture": "https://example.com/profiles/john.jpg",
       "joinDate": "2024-11-25"
     },
@@ -12,7 +12,7 @@
       "id": "2",
       "username": "jane_smith",
       "email": "jane.smith@example.com",
-      "passwordHash": "hashed_password_2",
+      "password": "hashed_password_2",
       "profilePicture": "https://example.com/profiles/jane.jpg",
       "joinDate": "2024-10-15"
     },
@@ -20,7 +20,7 @@
       "id": "3",
       "username": "mark_trader",
       "email": "mark.trader@example.com",
-      "passwordHash": "hashed_password_3",
+      "password": "hashed_password_3",
       "profilePicture": "https://example.com/profiles/mark.jpg",
       "joinDate": "2024-09-10"
     },
@@ -28,7 +28,7 @@
       "id": "4",
       "username": "susan_buyer",
       "email": "susan.buyer@example.com",
-      "passwordHash": "hashed_password_4",
+      "password": "hashed_password_4",
       "profilePicture": "https://example.com/profiles/susan.jpg",
       "joinDate": "2024-08-20"
     },
@@ -36,7 +36,7 @@
       "id": "5",
       "username": "alice_wonder",
       "email": "alice.wonder@example.com",
-      "passwordHash": "hashed_password_5",
+      "password": "hashed_password_5",
       "profilePicture": "https://example.com/profiles/alice.jpg",
       "joinDate": "2024-07-15"
     },
@@ -44,7 +44,7 @@
       "id": "6",
       "username": "bob_builder",
       "email": "bob.builder@example.com",
-      "passwordHash": "hashed_password_6",
+      "password": "hashed_password_6",
       "profilePicture": "https://example.com/profiles/bob.jpg",
       "joinDate": "2024-06-10"
     },
@@ -52,7 +52,7 @@
       "id": "7",
       "username": "charlie_brown",
       "email": "charlie.brown@example.com",
-      "passwordHash": "hashed_password_7",
+      "password": "hashed_password_7",
       "profilePicture": "https://example.com/profiles/charlie.jpg",
       "joinDate": "2024-05-05"
     },
@@ -60,7 +60,7 @@
       "id": "8",
       "username": "david_smith",
       "email": "david.smith@example.com",
-      "passwordHash": "hashed_password_8",
+      "password": "hashed_password_8",
       "profilePicture": "https://example.com/profiles/david.jpg",
       "joinDate": "2024-04-01"
     },
@@ -68,7 +68,7 @@
       "id": "9",
       "username": "eva_green",
       "email": "eva.green@example.com",
-      "passwordHash": "hashed_password_9",
+      "password": "hashed_password_9",
       "profilePicture": "https://example.com/profiles/eva.jpg",
       "joinDate": "2024-03-20"
     },
@@ -76,7 +76,7 @@
       "id": "0941",
       "username": "vi21",
       "email": "tranngohungvi@gmai.com",
-      "passwordHash": "A12345!",
+      "password": "A12345!",
       "profilePicture": "https://example.com/default-profile.jpg",
       "joinDate": "2024-11-30"
     }

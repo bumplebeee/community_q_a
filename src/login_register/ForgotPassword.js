@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "./util.css";
 import "./main.css";
 
@@ -20,8 +19,13 @@ const ForgotPassword = () => {
 
     try {
       // Gọi API để kiểm tra email
-      const response = await axios.get("http://localhost:9999/users");
-      const user = response.data.find((user) => user.email === email);
+      const response = await fetch("http://localhost:9999/users");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      const user = data.find((user) => user.email === email);
 
       if (user) {
         // Giả lập gửi email bằng setTimeout

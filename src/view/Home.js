@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Form,
-  FormControl,
-  Button,
-  ListGroup,
-} from "react-bootstrap";
+import { Container, Form, FormControl, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom"; // Sử dụng Link để điều hướng
 import QuestionList from "./QuestionList";
 
@@ -58,14 +52,6 @@ function Home() {
           onChange={handleSearchChange}
           style={{ backgroundColor: "#e6f7ff", borderColor: "#007bff" }}
         />
-        <Button
-          variant="primary"
-          className="ms-2"
-          onClick={() => setFilteredQuestions(filteredQuestions)}
-          style={{ backgroundColor: "#0056b3", borderColor: "#0056b3" }}
-        >
-          Search
-        </Button>
       </Form>
 
       {/* Gợi ý câu hỏi */}

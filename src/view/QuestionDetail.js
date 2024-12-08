@@ -42,14 +42,6 @@ function QuestionDetail({ questions, answers, users }) {
             <Card className="mb-3">
                 <Card.Body>
                     <Row>
-                        <Col md={2} className="text-center">
-                            <p>
-                                <strong>{question.votes}</strong> votes
-                            </p>
-                            <p>
-                                <strong>{question.views}</strong> views
-                            </p>
-                        </Col>
                         <Col md={10}>
                             <Card.Title>{question.title}</Card.Title>
                             <Card.Text>{question.content}</Card.Text>

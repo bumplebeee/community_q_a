@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 
-function EditProfile({ user }) {
+function EditProfile({ user, onProfileUpdate }) {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -30,7 +30,12 @@ function EditProfile({ user }) {
       .then((resp) => resp.json())
       .then((updatedUser) => {
         alert("Profile updated successfully!");
-        setUserData(updatedUser); // Update state with the saved changes
+
+        // Lưu lại user mới vào localStorage
+        localStorage.setItem("userId", updatedUser.id);
+
+        // Cập nhật thông tin người dùng trong App.js
+        onProfileUpdate(updatedUser);
       })
       .catch((err) => console.error("Error updating profile:", err));
   };
@@ -45,7 +50,7 @@ function EditProfile({ user }) {
             <Card.Body className="text-center">
               <img
                 className="img-account-profile rounded-circle mb-2"
-                src={"http://bootdey.com/img/Content/avatar/avatar1.png"}
+                src={userData?.profilePicture || "http://bootdey.com/img/Content/avatar/avatar1.png"}
                 alt="User"
                 style={{ width: "150px", height: "150px", objectFit: "cover" }}
               />
@@ -64,6 +69,7 @@ function EditProfile({ user }) {
             <Card.Body>
               {userData ? (
                 <Form>
+                  {/* Username - Disabled */}
                   <Form.Group className="mb-3">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -71,9 +77,11 @@ function EditProfile({ user }) {
                       name="username"
                       value={userData.username || ""}
                       onChange={handleChange}
+                      disabled
                     />
                   </Form.Group>
 
+                  {/* Email */}
                   <Form.Group className="mb-3">
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
@@ -84,16 +92,18 @@ function EditProfile({ user }) {
                     />
                   </Form.Group>
 
+                  {/* Password (Hidden) */}
                   <Form.Group className="mb-3">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
-                      type="text"
-                      name="passwordHash"
-                      value={userData.passwordHash || ""}
+                      type="password"
+                      name="password"
+                      value={userData.password || ""}
                       onChange={handleChange}
                     />
                   </Form.Group>
 
+                  {/* Join Date */}
                   <Form.Group className="mb-3">
                     <Form.Label>Join Date</Form.Label>
                     <Form.Control
@@ -108,7 +118,7 @@ function EditProfile({ user }) {
                   </Button>
                 </Form>
               ) : (
-                <div>Loading user data...</div>
+                <p>Loading...</p>
               )}
             </Card.Body>
           </Card>

@@ -34,31 +34,31 @@ function App() {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState({});
     const [users, setUsers] = useState([]);
-    const navigate = useNavigate(); // Sử dụng useNavigate
+    const navigate = useNavigate();
 
     const handleLogin = ({ id, username }) => {
-        setUser({ id, username }); // Lưu cả username và email
-        localStorage.setItem("userId", id); // Lưu userId vào localStorage
+        setUser({ id, username });
+        localStorage.setItem("userId", id);
         navigate("/home");
     };
 
     const handleLogout = () => {
-        setUser(null); // Xóa thông tin người dùng
-        localStorage.removeItem("userId"); // Xóa thông tin userId khỏi localStorage
-        navigate("/"); // Quay lại trang login
+        setUser(null);
+        localStorage.removeItem("userId");
+        navigate("/");
     };
 
     const handleProfileUpdate = (updatedProfile) => {
         setUser((prevUser) => ({
             ...prevUser,
-            ...updatedProfile, // Update user profile state
+            ...updatedProfile,
         }));
+        localStorage.setItem("userId", updatedProfile.id); // Update localStorage after profile update
     };
 
     useEffect(() => {
         const storedUserId = localStorage.getItem("userId");
         if (storedUserId) {
-            // Tìm người dùng trong data và thiết lập lại thông tin user từ localStorage
             fetch("/database.json")
                 .then((response) => response.json())
                 .then((data) => {
@@ -67,12 +67,9 @@ function App() {
                         setUser(user);
                     }
                 })
-                .catch((error) =>
-                    console.error("Error loading user data:", error)
-                );
+                .catch((error) => console.error("Error loading user data:", error));
         }
 
-        // Giả sử bạn đã lấy dữ liệu từ một API hoặc file JSON
         fetch("/database.json")
             .then((response) => response.json())
             .then((data) => {
@@ -93,7 +90,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/sign-up" element={<Register />} />
 
-            {/* Trang Home, luôn hiển thị */}
+            {/* Trang Home */}
             <Route
                 path="/home"
                 element={
@@ -103,7 +100,7 @@ function App() {
                 }
             />
 
-            {/* Trang Questions, luôn hiển thị */}
+            {/* Trang Questions */}
             <Route
                 path="/questions"
                 element={
@@ -133,7 +130,7 @@ function App() {
                 }
             />
 
-            {/* Trang AddPost, chỉ hiển thị khi người dùng đã đăng nhập */}
+            {/* Trang AddPost */}
             <Route
                 path="/add-post"
                 element={
@@ -178,7 +175,7 @@ function App() {
                 }
             />
 
-            {/* Trang MyPost, chỉ hiển thị khi người dùng đã đăng nhập */}
+            {/* Trang MyPost */}
             <Route
                 path="/my-post"
                 element={

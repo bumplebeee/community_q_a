@@ -1,360 +1,294 @@
 {
-  "users": [
-    {
-      "id": "1",
-      "username": "john_doee",
-      "email": "john.doe@example.com",
-      "password": "A12345!",
-      "profilePicture": "https://example.com/profiles/john.jpg",
-      "joinDate": "2024-11-25"
-    },
-    {
-      "id": "2",
-      "username": "jane_smith",
-      "email": "jane.smith@example.com",
-      "password": "A12345!",
-      "profilePicture": "https://example.com/profiles/jane.jpg",
-      "joinDate": "2024-10-15"
-    },
-    {
-      "id": "3",
-      "username": "mark_trader",
-      "email": "mark.trader@example.com",
-      "password": "A12345!",
-      "profilePicture": "https://example.com/profiles/mark.jpg",
-      "joinDate": "2024-09-10"
-    },
-    {
-      "id": "4",
-      "username": "susan_buyer",
-      "email": "susan.buyer@example.com",
-      "password": "A12345!",
-      "profilePicture": "https://example.com/profiles/susan.jpg",
-      "joinDate": "2024-08-20"
-    },
-    {
-      "id": "5",
-      "username": "alice_wonder",
-      "email": "alice.wonder@example.com",
-      "password": "A12345!",
-      "profilePicture": "https://example.com/profiles/alice.jpg",
-      "joinDate": "2024-07-15"
-    },
-    {
-      "id": "6",
-      "username": "bob_builder",
-      "email": "bob.builder@example.com",
-      "password": "A12345!",
-      "profilePicture": "https://example.com/profiles/bob.jpg",
-      "joinDate": "2024-06-10"
-    },
-    {
-      "id": "7",
-      "username": "charlie_brown",
-      "email": "charlie.brown@example.com",
-      "password": "A12345!",
-      "profilePicture": "https://example.com/profiles/charlie.jpg",
-      "joinDate": "2024-05-05"
-    },
-    {
-      "id": "8",
-      "username": "david_smith",
-      "email": "david.smith@example.com",
-      "password": "A12345!",
-      "profilePicture": "https://example.com/profiles/david.jpg",
-      "joinDate": "2024-04-01"
-    },
-    {
-      "id": "9",
-      "username": "eva_green",
-      "email": "eva.green@example.com",
-      "password": "A12345!",
-      "profilePicture": "https://example.com/profiles/eva.jpg",
-      "joinDate": "2024-03-20"
-    },
-    {
-      "id": "0941",
-      "username": "vi21",
-      "email": "tranngohungvi@gmai.com",
-      "password": "A12345!",
-      "profilePicture": "https://example.com/default-profile.jpg",
-      "joinDate": "2024-11-30"
-    }
-  ],
-  "tags": [
-    {
-      "id": "1",
-      "name": "Python"
-    },
-    {
-      "id": "2",
-      "name": "Javascript"
-    },
-    {
-      "id": "3",
-      "name": "C#"
-    },
-    {
-      "id": "4",
-      "name": "Java"
-    },
-    {
-      "id": "5",
-      "name": "Node.js"
-    }
-  ],
-  "questions": [
-    {
-      "id": "101",
-      "title": "How to implement authentication in Node.js?",
-      "content": "What are some secure and scalable approaches to implement user authentication in a Node.js application?",
-      "userId": 1,
-      "tags": [
-        5
-      ],
-      "createdDate": "2024-11-27"
-    },
-    {
-      "id": "102",
-      "title": "What are closures in JavaScript?",
-      "content": "Can someone explain closures in JavaScript with an example? I find the concept a bit confusing.",
-      "userId": 2,
-      "tags": [
-        2
-      ],
-      "createdDate": "2024-11-25"
-    },
-    {
-      "id": "103",
-      "title": "Best practices for working with threads in Java",
-      "content": "What are the best practices to manage and optimize threads in a Java application?",
-      "userId": 3,
-      "tags": [
-        4
-      ],
-      "createdDate": "2024-11-26"
-    },
-    {
-      "id": "104",
-      "title": "Understanding async/await in Python",
-      "content": "How does async/await work in Python, and how does it differ from traditional multithreading?",
-      "userId": 4,
-      "tags": [
-        1
-      ],
-      "createdDate": "2024-11-24"
-    },
-    {
-      "id": "105",
-      "title": "How to use LINQ in C# effectively?",
-      "content": "Can someone provide examples and explain best practices for using LINQ in C#?",
-      "userId": 5,
-      "tags": [
-        3
-      ],
-      "createdDate": "2024-11-23"
-    },
-    {
-      "id": "106",
-      "title": "Using environment variables in Node.js",
-      "content": "What is the best way to use and manage environment variables in a Node.js application?",
-      "userId": 1,
-      "tags": [
-        5
-      ],
-      "createdDate": "2024-11-22"
-    },
-    {
-      "id": "107",
-      "title": "What is a lambda expression in Java?",
-      "content": "Can someone explain lambda expressions in Java with examples and use cases?",
-      "userId": 2,
-      "tags": [
-        4
-      ],
-      "createdDate": "2024-11-21"
-    },
-    {
-      "id": "108",
-      "title": "How to handle exceptions in Python?",
-      "content": "What are the best practices for exception handling in Python?",
-      "userId": 3,
-      "tags": [
-        1
-      ],
-      "createdDate": "2024-11-20"
-    },
-    {
-      "id": "109",
-      "title": "Event delegation in JavaScript",
-      "content": "Can someone explain what event delegation is in JavaScript and provide an example?",
-      "userId": 4,
-      "tags": [
-        2
-      ],
-      "createdDate": "2024-11-19"
-    },
-    {
-      "id": "110",
-      "title": "Dependency injection in C#",
-      "content": "What is dependency injection in C#, and how can it improve code maintainability?",
-      "userId": 5,
-      "tags": [
-        3
-      ],
-      "createdDate": "2024-11-18"
-    },
-    {
-      "id": "fd8b",
-      "title": "C#",
-      "content": "how to download visual studio?",
-      "tags": [
-        3
-      ],
-      "userId": "0941",
-      "createdDate": "2024-12-04"
-    },
-    {
-      "id": "7683",
-      "title": "java",
-      "content": "sss",
-      "tags": [
-        1
-      ],
-      "userId": "0941",
-      "createdDate": "2024-12-07"
-    },
-    {
-      "id": "28ee",
-      "title": "java",
-      "content": "aaa",
-      "tags": [
-        1
-      ],
-      "userId": "0941",
-      "createdDate": "2024-12-07"
-    }
-  ],
-  "answers": [
-    {
-      "id": "201",
-      "questionId": 101,
-      "content": "You can use libraries like Passport.js for authentication in Node.js. Passport supports multiple strategies such as local, OAuth, and JWT.",
-      "userId": 2
-    },
-    {
-      "id": "202",
-      "questionId": 101,
-      "content": "Implementing JSON Web Tokens (JWT) with libraries like jsonwebtoken is a common approach for stateless authentication in Node.js.",
-      "userId": 3
-    },
-    {
-      "id": "203",
-      "questionId": 102,
-      "content": "A closure is a function that retains access to its parent scope, even after the parent function has finished execution. Here's an example:\n```javascript\nfunction createCounter() {\n  let count = 0;\n  return function() {\n    return ++count;\n  };\n}\nconst counter = createCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```",
-      "userId": 4
-    },
-    {
-      "id": "204",
-      "questionId": 102,
-      "content": "Closures allow you to encapsulate variables and protect them from external access. This is particularly useful in JavaScript for private variables.",
-      "userId": 1
-    },
-    {
-      "id": "205",
-      "questionId": 103,
-      "content": "Use thread pools with `ExecutorService` in Java to manage threads efficiently and avoid creating threads manually.",
-      "userId": 2
-    },
-    {
-      "id": "206",
-      "questionId": 103,
-      "content": "Consider using `CompletableFuture` in Java for asynchronous programming with better readability and performance.",
-      "userId": 3
-    },
-    {
-      "id": "207",
-      "questionId": 104,
-      "content": "The `async` and `await` keywords in Python allow you to write asynchronous code in a synchronous style, improving readability.",
-      "userId": 4
-    },
-    {
-      "id": "208",
-      "questionId": 104,
-      "content": "Unlike multithreading, async/await in Python uses cooperative multitasking, making it more suitable for I/O-bound tasks.",
-      "userId": 5
-    },
-    {
-      "id": "209",
-      "questionId": 105,
-      "content": "LINQ simplifies querying collections in C#. For example:\n```csharp\nvar result = myList.Where(x => x > 10).OrderBy(x => x);\n```",
-      "userId": 1
-    },
-    {
-      "id": "210",
-      "questionId": 105,
-      "content": "Use LINQ with deferred execution for performance optimization, especially for large datasets.",
-      "userId": 2
-    },
-    {
-      "id": "211",
-      "questionId": 106,
-      "content": "Use the `dotenv` package in Node.js to manage environment variables securely.",
-      "userId": 3
-    },
-    {
-      "id": "212",
-      "questionId": 106,
-      "content": "Store sensitive environment variables in a `.env` file and load them using `process.env` in your application.",
-      "userId": 4
-    },
-    {
-      "id": "213",
-      "questionId": 107,
-      "content": "Lambda expressions in Java provide a concise way to implement functional interfaces. Example:\n```java\nRunnable r = () -> System.out.println(\"Hello, World!\");\nr.run();\n```",
-      "userId": 5
-    },
-    {
-      "id": "214",
-      "questionId": 107,
-      "content": "Lambda expressions in Java can simplify working with collections. Example:\n```java\nlist.forEach(item -> System.out.println(item));\n```",
-      "userId": 1
-    },
-    {
-      "id": "215",
-      "questionId": 108,
-      "content": "Use try-except blocks in Python for exception handling. Example:\n```python\ntry:\n    x = 1 / 0\nexcept ZeroDivisionError as e:\n    print(f\"Error: {e}\")\n```",
-      "userId": 2
-    },
-    {
-      "id": "216",
-      "questionId": 108,
-      "content": "Always catch specific exceptions in Python to avoid hiding bugs unintentionally.",
-      "userId": 3
-    },
-    {
-      "id": "217",
-      "questionId": 109,
-      "content": "Event delegation in JavaScript allows you to attach a single event listener to a parent element to handle events on its children.",
-      "userId": 4
-    },
-    {
-      "id": "218",
-      "questionId": 109,
-      "content": "Here's an example of event delegation:\n```javascript\ndocument.getElementById('parent').addEventListener('click', function(e) {\n  if (e.target && e.target.matches('button.class-name')) {\n    console.log('Button clicked!');\n  }\n});\n```",
-      "userId": 5
-    },
-    {
-      "id": "219",
-      "questionId": 110,
-      "content": "Dependency Injection (DI) in C# allows better separation of concerns by providing dependencies from outside the class, often via constructors.",
-      "userId": 1
-    },
-    {
-      "id": "220",
-      "questionId": 110,
-      "content": "Use dependency injection frameworks like Autofac or Microsoft.Extensions.DependencyInjection for scalable DI implementations in C#.",
-      "userId": 2
-    }
-  ]
+    "users": [
+        {
+            "id": "1",
+            "username": "john_doee",
+            "email": "john.doe@example.com",
+            "password": "A12345!",
+            "profilePicture": "https://example.com/profiles/john.jpg",
+            "joinDate": "2024-11-25"
+        },
+        {
+            "id": "2",
+            "username": "jane_smith",
+            "email": "jane.smith@example.com",
+            "password": "A12345!",
+            "profilePicture": "https://example.com/profiles/jane.jpg",
+            "joinDate": "2024-10-15"
+        },
+        {
+            "id": "0941",
+            "username": "vi21",
+            "email": "tranngohungvi@gmai.com",
+            "password": "A12345!",
+            "profilePicture": "https://example.com/default-profile.jpg",
+            "joinDate": "2024-11-30"
+        },
+        {
+            "id": "123",
+            "username": "beakvietthinh",
+            "email": "thinhkesat@gmail.com",
+            "password": "Thinhdeptrai123@@",
+            "profilePicture": "https://example.com/default-profile.jpg",
+            "joinDate": "2024-11-30"
+        }
+    ],
+    "tags": [
+        {
+            "id": "1",
+            "name": "Python"
+        },
+        {
+            "id": "2",
+            "name": "Javascript"
+        },
+        {
+            "id": "3",
+            "name": "C#"
+        },
+        {
+            "id": "4",
+            "name": "Java"
+        },
+        {
+            "id": "5",
+            "name": "Node.js"
+        }
+    ],
+    "questions": [
+        {
+            "id": "101",
+            "title": "How to implement authentication in Node.js?",
+            "content": "What are some secure and scalable approaches to implement user authentication in a Node.js application?",
+            "userId": 1,
+            "tags": [5],
+            "createdDate": "2024-11-27"
+        },
+        {
+            "id": "102",
+            "title": "What are closures in JavaScript?",
+            "content": "Can someone explain closures in JavaScript with an example? I find the concept a bit confusing.",
+            "userId": 2,
+            "tags": [2],
+            "createdDate": "2024-11-25"
+        },
+        {
+            "id": "103",
+            "title": "Best practices for working with threads in Java",
+            "content": "What are the best practices to manage and optimize threads in a Java application?",
+            "userId": 3,
+            "tags": [4],
+            "createdDate": "2024-11-26"
+        },
+        {
+            "id": "104",
+            "title": "Understanding async/await in Python",
+            "content": "How does async/await work in Python, and how does it differ from traditional multithreading?",
+            "userId": 4,
+            "tags": [1],
+            "createdDate": "2024-11-24"
+        },
+        {
+            "id": "105",
+            "title": "How to use LINQ in C# effectively?",
+            "content": "Can someone provide examples and explain best practices for using LINQ in C#?",
+            "userId": 5,
+            "tags": [3],
+            "createdDate": "2024-11-23"
+        },
+        {
+            "id": "106",
+            "title": "Using environment variables in Node.js",
+            "content": "What is the best way to use and manage environment variables in a Node.js application?",
+            "userId": 1,
+            "tags": [5],
+            "createdDate": "2024-11-22"
+        },
+        {
+            "id": "107",
+            "title": "What is a lambda expression in Java?",
+            "content": "Can someone explain lambda expressions in Java with examples and use cases?",
+            "userId": 2,
+            "tags": [4],
+            "createdDate": "2024-11-21"
+        },
+        {
+            "id": "108",
+            "title": "How to handle exceptions in Python?",
+            "content": "What are the best practices for exception handling in Python?",
+            "userId": 3,
+            "tags": [1],
+            "createdDate": "2024-11-20"
+        },
+        {
+            "id": "109",
+            "title": "Event delegation in JavaScript",
+            "content": "Can someone explain what event delegation is in JavaScript and provide an example?",
+            "userId": 4,
+            "tags": [2],
+            "createdDate": "2024-11-19"
+        },
+        {
+            "id": "110",
+            "title": "Dependency injection in C#",
+            "content": "What is dependency injection in C#, and how can it improve code maintainability?",
+            "userId": 5,
+            "tags": [3],
+            "createdDate": "2024-11-18"
+        },
+        {
+            "id": "fd8b",
+            "title": "C#",
+            "content": "how to download visual studio?",
+            "tags": [3],
+            "userId": "0941",
+            "createdDate": "2024-12-04"
+        },
+        {
+            "id": "7683",
+            "title": "java",
+            "content": "sss",
+            "tags": [1],
+            "userId": "0941",
+            "createdDate": "2024-12-07"
+        },
+        {
+            "id": "28ee",
+            "title": "java",
+            "content": "aaa",
+            "tags": [1],
+            "userId": "0941",
+            "createdDate": "2024-12-07"
+        },
+        {
+            "id": "4f1e",
+            "title": "Trong chieu thu",
+            "content": "Anh ngoi an qua du du",
+            "tags": [1],
+            "userId": "123",
+            "createdDate": "2024-12-07"
+        }
+    ],
+    "answers": [
+        {
+            "id": "201",
+            "questionId": 101,
+            "content": "You can use libraries like Passport.js for authentication in Node.js. Passport supports multiple strategies such as local, OAuth, and JWT.",
+            "userId": 2
+        },
+        {
+            "id": "202",
+            "questionId": 101,
+            "content": "Implementing JSON Web Tokens (JWT) with libraries like jsonwebtoken is a common approach for stateless authentication in Node.js.",
+            "userId": 3
+        },
+        {
+            "id": "203",
+            "questionId": 102,
+            "content": "A closure is a function that retains access to its parent scope, even after the parent function has finished execution. Here's an example:\n```javascript\nfunction createCounter() {\n  let count = 0;\n  return function() {\n    return ++count;\n  };\n}\nconst counter = createCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```",
+            "userId": 4
+        },
+        {
+            "id": "204",
+            "questionId": 102,
+            "content": "Closures allow you to encapsulate variables and protect them from external access. This is particularly useful in JavaScript for private variables.",
+            "userId": 1
+        },
+        {
+            "id": "205",
+            "questionId": 103,
+            "content": "Use thread pools with `ExecutorService` in Java to manage threads efficiently and avoid creating threads manually.",
+            "userId": 2
+        },
+        {
+            "id": "206",
+            "questionId": 103,
+            "content": "Consider using `CompletableFuture` in Java for asynchronous programming with better readability and performance.",
+            "userId": 3
+        },
+        {
+            "id": "207",
+            "questionId": 104,
+            "content": "The `async` and `await` keywords in Python allow you to write asynchronous code in a synchronous style, improving readability.",
+            "userId": 4
+        },
+        {
+            "id": "208",
+            "questionId": 104,
+            "content": "Unlike multithreading, async/await in Python uses cooperative multitasking, making it more suitable for I/O-bound tasks.",
+            "userId": 5
+        },
+        {
+            "id": "209",
+            "questionId": 105,
+            "content": "LINQ simplifies querying collections in C#. For example:\n```csharp\nvar result = myList.Where(x => x > 10).OrderBy(x => x);\n```",
+            "userId": 1
+        },
+        {
+            "id": "210",
+            "questionId": 105,
+            "content": "Use LINQ with deferred execution for performance optimization, especially for large datasets.",
+            "userId": 2
+        },
+        {
+            "id": "211",
+            "questionId": 106,
+            "content": "Use the `dotenv` package in Node.js to manage environment variables securely.",
+            "userId": 3
+        },
+        {
+            "id": "212",
+            "questionId": 106,
+            "content": "Store sensitive environment variables in a `.env` file and load them using `process.env` in your application.",
+            "userId": 4
+        },
+        {
+            "id": "213",
+            "questionId": 107,
+            "content": "Lambda expressions in Java provide a concise way to implement functional interfaces. Example:\n```java\nRunnable r = () -> System.out.println(\"Hello, World!\");\nr.run();\n```",
+            "userId": 5
+        },
+        {
+            "id": "214",
+            "questionId": 107,
+            "content": "Lambda expressions in Java can simplify working with collections. Example:\n```java\nlist.forEach(item -> System.out.println(item));\n```",
+            "userId": 1
+        },
+        {
+            "id": "215",
+            "questionId": 108,
+            "content": "Use try-except blocks in Python for exception handling. Example:\n```python\ntry:\n    x = 1 / 0\nexcept ZeroDivisionError as e:\n    print(f\"Error: {e}\")\n```",
+            "userId": 2
+        },
+        {
+            "id": "216",
+            "questionId": 108,
+            "content": "Always catch specific exceptions in Python to avoid hiding bugs unintentionally.",
+            "userId": 3
+        },
+        {
+            "id": "217",
+            "questionId": 109,
+            "content": "Event delegation in JavaScript allows you to attach a single event listener to a parent element to handle events on its children.",
+            "userId": 4
+        },
+        {
+            "id": "218",
+            "questionId": 109,
+            "content": "Here's an example of event delegation:\n```javascript\ndocument.getElementById('parent').addEventListener('click', function(e) {\n  if (e.target && e.target.matches('button.class-name')) {\n    console.log('Button clicked!');\n  }\n});\n```",
+            "userId": 5
+        },
+        {
+            "id": "219",
+            "questionId": 110,
+            "content": "Dependency Injection (DI) in C# allows better separation of concerns by providing dependencies from outside the class, often via constructors.",
+            "userId": 1
+        },
+        {
+            "id": "220",
+            "questionId": 110,
+            "content": "Use dependency injection frameworks like Autofac or Microsoft.Extensions.DependencyInjection for scalable DI implementations in C#.",
+            "userId": 2
+        }
+    ]
 }

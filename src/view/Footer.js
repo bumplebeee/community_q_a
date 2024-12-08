@@ -14,7 +14,10 @@ function Footer() {
                 <Row>
                     <Col md={4}>
                         <h5>About Us</h5>
-                        <p>Day la web de moi nguoi thao luan ve viec mua ban</p>
+                        <p>
+                            This is a website that helps people exchange
+                            information about learning and programming.
+                        </p>
                     </Col>
                     <Col md={4}>
                         <h5>Quick Links</h5>
@@ -80,4 +83,4 @@ function Footer() {
     );
 }
 
-export default Footer;  
+export default Footer;

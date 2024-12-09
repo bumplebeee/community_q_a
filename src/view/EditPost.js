@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "./AddPost.css";
+import { useNavigate, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const AddPost = () => {
-  const [tags, setTags] = useState([]); // State to store tags
+const EditPost = () => {
+  const [tags, setTags] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
     content: "",
     tags: "",
   });
-  const [userId, setUserId] = useState(null); // State to store userId
-  const navigate = useNavigate(); // Hook to navigate
+  const [userId, setUserId] = useState(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  // Fetch tags from database.json
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const response = await fetch("/database.json"); // Accessing file in public folder
+        const response = await fetch("/database.json");
         if (!response.ok) {
           throw new Error("Failed to fetch tags");
         }
         const data = await response.json();
-        setTags(data.tags); // Assuming your tags are under "tags" in JSON
+        setTags(data.tags);
       } catch (error) {
         console.error("Error fetching tags:", error);
       }
@@ -30,65 +29,80 @@ const AddPost = () => {
 
     fetchTags();
 
-    // Get userId from localStorage if it's stored
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
       setUserId(storedUserId);
+    } else {
+      alert("You must be logged in to edit a post.");
+      navigate("/login");
     }
-  }, []);
 
-  // Handle input changes
+    const fetchPost = async () => {
+      try {
+        const response = await fetch(`http://localhost:9999/questions/${id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch post data");
+        }
+        const data = await response.json();
+        setFormData({
+          title: data.title,
+          content: data.content,
+          tags: data.tags[0],
+        });
+      } catch (error) {
+        console.error("Error fetching post data:", error);
+      }
+    };
+
+    if (id) fetchPost();
+  }, [id, navigate]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!userId) {
-      alert("You must be logged in to create a post.");
+      alert("You must be logged in to edit a post.");
+      navigate("/login");
       return;
     }
 
-    const newPost = {
+    const updatedPost = {
       title: formData.title,
       content: formData.content,
-      tags: [parseInt(formData.tags)], // Assuming tags are stored as ID (numbers) in the JSON
-      userId: userId, // Attach userId here
-      createdDate: new Date().toISOString().split("T")[0], // Getting current date in yyyy-mm-dd format
+      tags: [parseInt(formData.tags)],
+      userId: userId,
+      updatedDate: new Date().toISOString().split("T")[0],
     };
 
-    // Simulate saving data by making a POST request to the API
     try {
-      const response = await fetch("http://localhost:9999/questions", {
-        method: "POST",
+      const response = await fetch(`http://localhost:9999/questions/${id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newPost),
+        body: JSON.stringify(updatedPost),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create post");
+        throw new Error("Failed to update post");
       }
 
       const result = await response.json();
-      console.log("Post created:", result);
-      alert("Question created successfully!");
+      console.log("Post updated:", result);
+      alert("Post updated successfully!");
 
-      // Redirect to /home after successful post creation
+      // Lưu userId vào localStorage
+      localStorage.setItem("userId", userId);
+
+      // Điều hướng về trang home sau khi cập nhật
       navigate("/home");
-
-      // Reset form
-      setFormData({
-        title: "",
-        content: "",
-        tags: "",
-      });
     } catch (error) {
-      console.error("Error creating post:", error);
+      console.error("Error updating post:", error);
     }
   };
 
@@ -99,15 +113,13 @@ const AddPost = () => {
         backgroundColor: "white",
         borderRadius: "10px",
         border: "1px solid black",
+        padding: "20px",
       }}
     >
       <div className="row justify-content-center">
         <div className="col-md-8">
-          <h1 className="text-center mb-4" style={{ marginTop: "20px" }}>
-            Create Question
-          </h1>
+          <h1 className="text-center mb-4">Edit Question</h1>
           <form onSubmit={handleSubmit}>
-            {/* Title Field */}
             <div className="form-group">
               <label htmlFor="title" className="form-label">
                 Question Title <span className="require">*</span>
@@ -117,14 +129,12 @@ const AddPost = () => {
                 className="form-control"
                 id="title"
                 name="title"
-                placeholder="Enter your question title"
                 value={formData.title}
                 onChange={handleChange}
                 required
               />
             </div>
 
-            {/* Content Field */}
             <div className="form-group">
               <label htmlFor="content" className="form-label">
                 Question Content <span className="require">*</span>
@@ -134,14 +144,12 @@ const AddPost = () => {
                 id="content"
                 name="content"
                 rows="5"
-                placeholder="Enter detailed content of your question"
                 value={formData.content}
                 onChange={handleChange}
                 required
               ></textarea>
             </div>
 
-            {/* Tags Field */}
             <div className="form-group">
               <label htmlFor="tags" className="form-label">
                 Tags
@@ -162,20 +170,14 @@ const AddPost = () => {
               </select>
             </div>
 
-            {/* Submit and Cancel Buttons */}
-            <div
-              className="form-group text-center mt-4"
-              style={{ marginBottom: "20px" }}
-            >
+            <div className="form-group text-center mt-4">
               <button type="submit" className="btn btn-primary mx-2">
-                Create
+                Update
               </button>
               <button
                 type="button"
                 className="btn btn-secondary mx-2"
-                onClick={() =>
-                  setFormData({ title: "", content: "", tags: "" })
-                }
+                onClick={() => navigate("/home")}
               >
                 Cancel
               </button>
@@ -187,4 +189,4 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+export default EditPost;

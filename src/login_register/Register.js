@@ -158,7 +158,7 @@ const Register = () => {
               <p>
                 Already have an account?{" "}
                 <a
-                  href="/"
+                  href="/login"
                   className="txt1"
                   style={{ fontFamily: "Ubuntu, sans-serif", color: "#d41872" }}
                 >

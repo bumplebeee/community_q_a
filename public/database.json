@@ -205,14 +205,24 @@
       "createdDate": "2024-12-07"
     },
     {
-      "id": "4cfa",
       "title": "FPT ????",
-      "content": "Sky ơi",
+      "content": "Sky ơi333aaaa",
       "tags": [
-        4
+        5
       ],
       "userId": "7187",
-      "createdDate": "2024-12-08"
+      "updatedDate": "2024-12-09",
+      "id": "4cfa"
+    },
+    {
+      "title": "FPT ????",
+      "content": "ccsdc",
+      "tags": [
+        2
+      ],
+      "userId": "7187",
+      "updatedDate": "2024-12-09",
+      "id": "4eaa"
     }
   ],
   "answers": [

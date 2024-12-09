@@ -14,6 +14,7 @@ import Footer from "./view/Footer";
 import EditProfile from "./view/Profile";
 import QuestionDetail from "./view/QuestionDetail";
 import MyPost from "./view/MyPost";
+import EditPost from "./view/EditPost";
 
 // Layout for pages after login
 const MainLayout = ({ children, user, onLogout }) => {
@@ -155,7 +156,7 @@ function App() {
         }
       />
 
-      {/* Trang chi tiết câu hỏi */}
+      {/* Trang QuestionDeatail */}
       <Route
         path="/question/:id"
         element={
@@ -176,6 +177,19 @@ function App() {
           user ? (
             <MainLayout user={user} onLogout={handleLogout}>
               <MyPost user={user} questions={questions} />
+            </MainLayout>
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      {/* Trang Edit Post */}
+      <Route
+        path="/editPost/:id"
+        element={
+          user ? (
+            <MainLayout user={user} onLogout={handleLogout}>
+              <EditPost user={user} questions={questions} />
             </MainLayout>
           ) : (
             <Navigate to="/login" />

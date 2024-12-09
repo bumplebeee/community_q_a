@@ -96,12 +96,11 @@ const EditPost = () => {
       console.log("Post updated:", result);
       alert("Post updated successfully!");
 
-      const storedUserId = localStorage.getItem("userId");
-      if (storedUserId) {
-        navigate("/my-post");
-      } else {
-        navigate("/login");
-      }
+      // Lưu userId vào localStorage
+      localStorage.setItem("userId", userId);
+
+      // Điều hướng về trang home sau khi cập nhật
+      navigate("/home");
     } catch (error) {
       console.error("Error updating post:", error);
     }
@@ -178,7 +177,7 @@ const EditPost = () => {
               <button
                 type="button"
                 className="btn btn-secondary mx-2"
-                onClick={() => navigate("/my-post")}
+                onClick={() => navigate("/home")}
               >
                 Cancel
               </button>

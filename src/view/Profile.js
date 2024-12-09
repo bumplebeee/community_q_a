@@ -54,10 +54,8 @@ function EditProfile({ user, onProfileUpdate }) {
                 alt="User"
                 style={{ width: "150px", height: "150px", objectFit: "cover" }}
               />
-              <div className="small text-muted mb-4">
-                JPG or PNG no larger than 5 MB
-              </div>
-              <Form.Control type="file" accept="image/*" className="mb-2" />
+              
+             
             </Card.Body>
           </Card>
         </Col>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function EditProfile({ user, onProfileUpdate }) {
   const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:9999/users")
@@ -36,6 +38,7 @@ function EditProfile({ user, onProfileUpdate }) {
 
         // Cập nhật thông tin người dùng trong App.js
         onProfileUpdate(updatedUser);
+        navigate("/home");
       })
       .catch((err) => console.error("Error updating profile:", err));
   };
@@ -44,24 +47,24 @@ function EditProfile({ user, onProfileUpdate }) {
     <Container className="px-4 mt-4">
       <Row>
         {/* Profile Picture */}
-        <Col xl={4}>
-          <Card className="mb-4">
+        {/* <Col xl={4}>
+          {/* <Card className="mb-4">
             <Card.Header>Profile Picture</Card.Header>
             <Card.Body className="text-center">
-              <img
-                className="img-account-profile rounded-circle mb-2"
-                src={userData?.profilePicture || "http://bootdey.com/img/Content/avatar/avatar1.png"}
-                alt="User"
-                style={{ width: "150px", height: "150px", objectFit: "cover" }}
-              />
-              
-             
+              {userData && (
+                <img
+                  className="img-account-profile rounded-circle mb-2"
+                  src={userData.profilePicture || "./src/view/image.png"}
+                  alt="User"
+                  style={{ width: "150px", height: "150px", objectFit: "cover" }}
+                />
+              )}
             </Card.Body>
-          </Card>
-        </Col>
+          </Card> */}
+        {/* </Col> */} 
 
         {/* Account Details */}
-        <Col xl={8}>
+        <Col xl={12}>
           <Card className="mb-4">
             <Card.Header>Account Details</Card.Header>
             <Card.Body>
